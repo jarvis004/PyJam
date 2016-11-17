@@ -1,0 +1,2 @@
+class UnequalLengthError(Exception):
+    pass
