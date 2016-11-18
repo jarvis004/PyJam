@@ -1,5 +1,6 @@
 from board import Board
 from amp import Amp
+from time import sleep
 
 b = Board()
 matrix = list()
@@ -15,3 +16,6 @@ filelist = ['audio.wav', 'hihat.wav', 'audio.wav']
 b.setFileList(filelist)
 a = Amp(b)
 a.makePlayers()
+a.setPower(True)
+sleep(4)
+a.setPower(False)
