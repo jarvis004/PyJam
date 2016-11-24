@@ -1,6 +1,7 @@
 import ui 
 from amp import Amp
 from board import Board 
+from PyQt5.QtWidgets import QFileDialog
 
 class GUI(ui.Ui_Form):
     def __init__(self, form):
@@ -17,6 +18,8 @@ class GUI(ui.Ui_Form):
 
     def addEventListeners(self):
         self.playButton.clicked.connect(self.playButtonToggled)
+        
+        # events on the matrix 
         def changeMatrix(a, b):
             print (a, b)
             def callback():
@@ -29,6 +32,7 @@ class GUI(ui.Ui_Form):
                     self.ampMatrix[a][b] = 0
                 print (a, b, self.ampMatrix[a][b], self.ampMatrix[a])
             return callback 
+        # end of callback
 
         i = 0
         for row in self.uiMatrix:
@@ -38,6 +42,10 @@ class GUI(ui.Ui_Form):
                 j += 1
             i += 1
 
+        # events on the file choosers 
+        self.fileSelector0.clicked.connect(self.fileChooser)
+        self.fileSelector1.clicked.connect(self.fileChooser)
+        self.fileSelector2.clicked.connect(self.fileChooser)
 
 
     def setupAmp(self):
@@ -56,12 +64,20 @@ class GUI(ui.Ui_Form):
 
     def playButtonToggled(self):
         self.amp.setPower(self.playButton.isChecked())
+        self.fileChooser()
 
 
-from PyQt5.QtWidgets import QDialog, QApplication
-import sys 
-app = QApplication([])
-window = QDialog()
-g = GUI(window)
-window.show()
-sys.exit(app.exec_())
+    def fileChooser(self):
+        filename, ok = QFileDialog.getOpenFileName(self.widget, caption="Select audio source",\
+                                            directory='.', filter="Audio (*.wav)")
+        if filename:
+            sender = self.widget.sender()
+            if (sender == self.fileSelector0):
+                self.filelist[0] = filename
+            if (sender == self.fileSelector1):
+                self.filelist[1] = filename
+            if (sender == self.fileSelector1):
+                self.filelist[2] = filename
+
+            sender.setText(filename.split('/')[-1][:20])
+            self.ampBoard.setFileList(self.filelist)
