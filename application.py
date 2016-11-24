@@ -2,6 +2,7 @@ import ui
 from amp import Amp
 from board import Board 
 from PyQt5.QtWidgets import QFileDialog
+from ui import ROW_COUNT, COLUMN_COUNT, PLAYING, NOT_PLAYING
 
 class GUI(ui.Ui_Form):
     def __init__(self, form):
@@ -12,7 +13,7 @@ class GUI(ui.Ui_Form):
         self.ampBoard = Board()
         self.ampMatrix = list()
         self.amp = None 
-        self.filelist = ['hihat.wav', '','']
+        self.filelist = ['', '','']
         self.setupAmp()
         self.addEventListeners()
 
@@ -21,7 +22,7 @@ class GUI(ui.Ui_Form):
         
         # events on the matrix 
         def changeMatrix(a, b):
-            print (a, b)
+            # print (a, b)
             def callback():
                 print (a, b)
                 if self.uiMatrix[a][b].isChecked():
@@ -30,7 +31,7 @@ class GUI(ui.Ui_Form):
                 else:
                     self.uiMatrix[a][b].setStyleSheet(ui.NOT_CHECKED)
                     self.ampMatrix[a][b] = 0
-                print (a, b, self.ampMatrix[a][b], self.ampMatrix[a])
+                # print (a, b, self.ampMatrix[a][b], self.ampMatrix[a])
             return callback 
         # end of callback
 
@@ -46,7 +47,12 @@ class GUI(ui.Ui_Form):
         self.fileSelector0.clicked.connect(self.fileChooser)
         self.fileSelector1.clicked.connect(self.fileChooser)
         self.fileSelector2.clicked.connect(self.fileChooser)
+        self.amp.timer.signal.connect(self.updateTimer)
 
+    def updateTimer(self):
+        t = self.amp.counter
+        self.status[t-1].setStyleSheet(NOT_PLAYING)
+        self.status[t].setStyleSheet(PLAYING)
 
     def setupAmp(self):
         for i in range(3):
@@ -59,13 +65,12 @@ class GUI(ui.Ui_Form):
         self.amp.makePlayers()
         self.amp.status_elems = self.status
 
-    def changeFileList(self):
-        self.filelist[0] = ""
-
     def playButtonToggled(self):
+        self.status[self.amp.counter].setStyleSheet(NOT_PLAYING)
         self.amp.setPower(self.playButton.isChecked())
-        self.fileChooser()
-
+        if self.amp.running:
+            self.status[self.amp.counter].setStyleSheet(NOT_PLAYING)
+        
 
     def fileChooser(self):
         filename, ok = QFileDialog.getOpenFileName(self.widget, caption="Select audio source",\
@@ -76,8 +81,20 @@ class GUI(ui.Ui_Form):
                 self.filelist[0] = filename
             if (sender == self.fileSelector1):
                 self.filelist[1] = filename
-            if (sender == self.fileSelector1):
+            if (sender == self.fileSelector2):
                 self.filelist[2] = filename
 
             sender.setText(filename.split('/')[-1][:20])
             self.ampBoard.setFileList(self.filelist)
+            isRunning = self.amp.running
+            t = self.amp.counter 
+            if (isRunning):
+                self.amp.setPower(False)
+            while (self.amp.running):
+                pass 
+            self.amp.makePlayers()
+            if (isRunning):
+                self.amp.setPower(True)
+                self.amp.counter = t
+
+            

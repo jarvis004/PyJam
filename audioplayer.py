@@ -2,7 +2,7 @@ import simpleaudio as sa
 import time
 
 class AudioPlayer:
-    def __init__(self, filename=None, timeSlice=0.5):
+    def __init__(self, filename=None, timeSlice=0.3):
         self.filename = filename
         self.timeSlice = timeSlice
         self.play_obj = None 

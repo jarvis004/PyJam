@@ -1,2 +1,0 @@
-class UnequalLengthError(Exception):
-    pass

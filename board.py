@@ -1,4 +1,4 @@
-from errors import *
+from custom_classes import UnequalLengthError
 
 class Board:
     def __init__(self):
