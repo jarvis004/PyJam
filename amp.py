@@ -1,6 +1,7 @@
 import threading
 import time 
 from audioplayer import AudioPlayer
+from ui import PLAYING, NOT_PLAYING
 
 class Amp:
     def __init__(self, board, timeSlice=0.5):    
@@ -12,6 +13,7 @@ class Amp:
         self.counter = 0
         self.ampThread = None 
         self.players = None
+        self.status_elems = None 
 
     def makePlayers(self):
         if self.players:
@@ -42,12 +44,18 @@ class Amp:
                 self.counter = (self.counter + 1) % self.board.columns
                 for i in range(self.playerCount):
                     if self.board.matrix[i][self.counter]:
-                        self.players[i].play()
+                        if self.board.filelist[i]:
+                            self.players[i].play()
                         print(i, '-', self.counter)
 
+                self.status_elems[self.counter].setStyleSheet(PLAYING)
                 time.sleep(self.timeSlice)
+                self.status_elems[self.counter].setStyleSheet(NOT_PLAYING)
                 # stop all players 
+                i = 0
                 for player in self.players:
-                    player.stop()
+                    if self.board.filelist[i]:
+                        player.stop()
+                    i+=1
         
         self.running = False 
