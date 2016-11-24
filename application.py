@@ -47,6 +47,12 @@ class GUI(ui.Ui_Form):
         self.fileSelector2.clicked.connect(self.fileChooser)
         self.amp.timer.signal.connect(self.updateTimer)
 
+        # timer event 
+        self.speedTimer.valueChanged.connect(self.updateSpeed)
+
+    def updateSpeed(self):
+        self.amp.timeSlice = self.speedTimer.value()
+
     def updateTimer(self):
         t = self.amp.counter
         self.status[t-1].setStyleSheet(NOT_PLAYING)

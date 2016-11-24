@@ -24,6 +24,10 @@ class Amp:
         for i in range(self.playerCount):
             self.players.append(AudioPlayer())
             self.players[i].setFile(self.board.filelist[i])
+        
+    def updateSpeeds(self, speed):
+        for player in self.players:
+            player.timeSlice = speed 
 
     def setPower(self, status):
         if status:

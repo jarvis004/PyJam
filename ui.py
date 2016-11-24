@@ -138,6 +138,13 @@ class Ui_Form(object):
             self.horizontalLayout_6.addWidget(cell)
             self.status.append(cell)
 
+        self.speedTimer = QtWidgets.QDoubleSpinBox()
+        self.speedTimer.setMinimum(0.05)
+        self.speedTimer.setMaximum(1.0)
+        self.speedTimer.setDecimals(2)
+        self.speedTimer.setSingleStep(0.1)
+        self.speedTimer.setSuffix(" s")
+        self.gridLayout_4.addWidget(self.speedTimer, 0, 0)
         self.gridLayout_4.addLayout(self.horizontalLayout_6, 0, 1, 1, 1)
         self.gridLayout_4.setRowMinimumHeight(0, 1)
         self.gridLayout_4.setRowMinimumHeight(1, 4)
