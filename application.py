@@ -22,7 +22,6 @@ class GUI(ui.Ui_Form):
         
         # events on the matrix 
         def changeMatrix(a, b):
-            # print (a, b)
             def callback():
                 print (a, b)
                 if self.uiMatrix[a][b].isChecked():
@@ -31,7 +30,6 @@ class GUI(ui.Ui_Form):
                 else:
                     self.uiMatrix[a][b].setStyleSheet(ui.NOT_CHECKED)
                     self.ampMatrix[a][b] = 0
-                # print (a, b, self.ampMatrix[a][b], self.ampMatrix[a])
             return callback 
         # end of callback
 

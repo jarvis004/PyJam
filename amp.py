@@ -48,12 +48,9 @@ class Amp:
                     if self.board.matrix[i][self.counter]:
                         if self.board.filelist[i]:
                             self.players[i].play()
-                        # print(i, '-', self.counter)
 
-                # self.status_elems[self.counter].setStyleSheet(PLAYING)
                 time.sleep(self.timeSlice)
                 self.timer.update()
-                # self.status_elems[self.counter].setStyleSheet(NOT_PLAYING)
                 # stop all players 
                 i = 0
                 for player in self.players:
