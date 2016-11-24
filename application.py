@@ -65,7 +65,7 @@ class GUI(ui.Ui_Form):
                 self.ampMatrix[i].append(0)
         self.ampBoard.setMatrix(self.ampMatrix)
         self.ampBoard.setFileList(self.filelist)
-        self.amp = Amp(self.ampBoard)
+        self.amp = Amp(self.ampBoard, self.speedTimer.value())
         self.amp.makePlayers()
         self.amp.status_elems = self.status
 
@@ -88,7 +88,7 @@ class GUI(ui.Ui_Form):
             if (sender == self.fileSelector2):
                 self.filelist[2] = filename
 
-            sender.setText(filename.split('/')[-1][:20])
+            sender.setText(filename.split('/')[-1][:7]+"...")
             self.ampBoard.setFileList(self.filelist)
             isRunning = self.amp.running
             t = self.amp.counter 
