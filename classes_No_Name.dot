@@ -1,0 +1,18 @@
+digraph "classes_No_Name" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{Amp|ampThread : Thread, NoneType\lboard\lcounter : int\lplayerCount\lplayers : NoneType, list\lpowerOn : bool\lrunning : bool\lstatus_elems : NoneType, list\ltimeSlice : float\ltimer\l|makePlayers()\lplayIndefinitely()\lsetPower()\lupdateSpeeds()\l}", shape="record"];
+"1" [label="{AudioPlayer|filename : NoneType\lplay_obj : NoneType\ltimeSlice : float\l|play()\lsetFile()\lsetTimeSlice()\lstop()\l}", shape="record"];
+"2" [label="{Board|columns : int\lfileList : NoneType\lfilelist\lmatrix : NoneType\lrows : int\l|setFileList()\lsetMatrix()\l}", shape="record"];
+"3" [label="{GUI|amp : NoneType\lampBoard\lampMatrix : list\lfilelist : list\luiBoard\l|addEventListeners()\lfileChooser()\lplayButtonToggled()\lsetupAmp()\lupdateSpeed()\lupdateTimer()\l}", shape="record"];
+"4" [label="{PyMixerJ|gui\l|closeEvent()\l}", shape="record"];
+"5" [label="{Ui_Form|fileSelector0\lfileSelector1\lfileSelector2\lgridLayout\lgridLayout_2\lgridLayout_3\lgridLayout_4\lhorizontalLayout\lhorizontalLayout_2\lhorizontalLayout_3\lhorizontalLayout_4\lhorizontalLayout_6\llabel_55\lplayButton\lsoundButton0\lsoundButton1\lsoundButton2\lspeedTimer\lstatus : list\luiMatrix : list\lwidget\lwidget1\l|addRow()\lretranslateUi()\lsetupUi()\l}", shape="record"];
+"6" [fontcolor="red", label="{UnequalLengthError|\l|}", shape="record"];
+"7" [label="{UpdateTimer|signal\l|update()\l}", shape="record"];
+"3" -> "5" [arrowhead="empty", arrowtail="none"];
+"0" -> "3" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="amp", style="solid"];
+"2" -> "3" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="uiBoard", style="solid"];
+"2" -> "3" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="ampBoard", style="solid"];
+"3" -> "4" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="gui", style="solid"];
+"7" -> "0" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="timer", style="solid"];
+}
