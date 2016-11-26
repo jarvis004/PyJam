@@ -1,5 +1,7 @@
 # PyJam
-##### Under development #####
+
+Implementation of simple beat mixer in Python using PyQt5. 
+Inspired by [MixerJs](https://github.com/esayemm/mixerjs)
 
 ### Installing dependencies for development
 #### Linux
