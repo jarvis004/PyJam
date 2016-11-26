@@ -212,7 +212,7 @@ class Ui_Form(object):
         self.fileSelector0.setText(_translate("Form", ""))
         self.soundButton0.setToolTip(_translate("Form", "<html><head/><body><p>Mute/Unmute</p></body></html>"))
         self.playButton.setToolTip(_translate("Form", "<html><head/><body><p>Play/Pause</p></body></html>"))
-        self.label_55.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; font-style:italic;\">PyMixerj</span></p></body></html>"))
+        self.label_55.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; font-style:italic;\">PyJam</span></p></body></html>"))
 
     def addRow(self, layout, index, count):
         """ Create a row and add it to the layout asked. 
