@@ -5,7 +5,12 @@ from ui import PLAYING, NOT_PLAYING
 from custom_classes import UpdateTimer
 
 class Amp:
+    """ This class mimics the amplifier.
+        It is responsible to start certain number of audio tracks
+        and synchronize them. 
+    """
     def __init__(self, board, timeSlice=0.5):    
+        """ The constructor of this class """
         self.board = board 
         self.playerCount = board.rows 
         self.timeSlice = timeSlice
@@ -18,6 +23,8 @@ class Amp:
         self.timer = UpdateTimer()
 
     def makePlayers(self):
+        """ Make instances of audio players required for different tracks. 
+        """
         if self.players:
             del self.players
         self.players = list()
@@ -26,10 +33,16 @@ class Amp:
             self.players[i].setFile(self.board.filelist[i])
         
     def updateSpeeds(self, speed):
+        """ Method to update speed of different players.
+            It modifies the time slice for single beat for all players. 
+        """
         for player in self.players:
             player.timeSlice = speed 
 
     def setPower(self, status):
+        """ Start or stop the amp / Mixer.
+            The boolean value of status is the required state. 
+        """
         if status:
             if not self.ampThread:
                 del self.ampThread
@@ -43,6 +56,10 @@ class Amp:
             self.ampThread = None
 
     def playIndefinitely(self):
+        """ Thread which is managed by setPower method.
+            It runs as long as the amp is running. 
+            Synchronized by runinng, counter and powerOn variables.
+        """
         self.running = True 
         self.counter = -1
         while self.powerOn:

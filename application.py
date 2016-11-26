@@ -5,7 +5,13 @@ from PyQt5.QtWidgets import QFileDialog
 from ui import ROW_COUNT, COLUMN_COUNT, PLAYING, NOT_PLAYING
 
 class GUI(ui.Ui_Form):
+    """ The main GUI application. 
+        The GUI layout is designed in Ui_Form class which is 
+        inherited and events added here.
+    """
     def __init__(self, form):
+        """ Create UI and add event listeners 
+        """
         super().__init__()
         self.setupUi(form)
         self.uiBoard = Board()
@@ -18,10 +24,14 @@ class GUI(ui.Ui_Form):
         self.addEventListeners()
 
     def addEventListeners(self):
+        """ Added event listeners to GUI elements. 
+        """
         self.playButton.clicked.connect(self.playButtonToggled)
         
         # events on the matrix 
         def changeMatrix(a, b):
+            """ Dummy method to generate callbacks for matrix events. 
+            """
             def callback():
                 print (a, b)
                 if self.uiMatrix[a][b].isChecked():
@@ -51,14 +61,20 @@ class GUI(ui.Ui_Form):
         self.speedTimer.valueChanged.connect(self.updateSpeed)
 
     def updateSpeed(self):
+        """ Slot to update speed when spinbox changed
+        """
         self.amp.timeSlice = self.speedTimer.value()
 
     def updateTimer(self):
+        """ Slot to update the current position. 
+        """
         t = self.amp.counter
         self.status[t-1].setStyleSheet(NOT_PLAYING)
         self.status[t].setStyleSheet(PLAYING)
 
     def setupAmp(self):
+        """ Create amp object and give it the matrix required. 
+        """
         for i in range(3):
             self.ampMatrix.append(list())
             for j in range(16):
@@ -70,6 +86,8 @@ class GUI(ui.Ui_Form):
         self.amp.status_elems = self.status
 
     def playButtonToggled(self):
+        """ Slot to handle play button clicks. 
+        """
         self.status[self.amp.counter].setStyleSheet(NOT_PLAYING)
         self.amp.setPower(self.playButton.isChecked())
         if self.amp.running:
@@ -77,6 +95,8 @@ class GUI(ui.Ui_Form):
         
 
     def fileChooser(self):
+        """ Slot to choose file to play. 
+        """
         filename, ok = QFileDialog.getOpenFileName(self.widget, caption="Select audio source",\
                                             directory='.', filter="Audio (*.wav)")
         if filename:

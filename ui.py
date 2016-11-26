@@ -4,7 +4,8 @@
 #
 # Created by: PyQt5 UI code generator 5.5.1
 #
-# WARNING! All changes made in this file will be lost!
+# Modified to avoid repetitive tasks 
+# Some parameters added for convenience 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -16,7 +17,11 @@ PLAYING = "background-color: green"
 NOT_PLAYING = "background-color: white"
 
 class Ui_Form(object):
+    """ The form generated from QtDesigner. 
+    """
     def setupUi(self, Form):
+        """ Setup the form and add components to it. 
+        """
         self.uiMatrix = list()
         for i in range(ROW_COUNT): self.uiMatrix.append(list())
         self.status = list()
@@ -193,6 +198,8 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
+        """ Translate ui components if required. 
+        """
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.fileSelector1.setToolTip(_translate("Form", "<html><head/><body><p>Set audio source</p></body></html>"))
@@ -208,6 +215,8 @@ class Ui_Form(object):
         self.label_55.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; font-style:italic;\">PyMixerj</span></p></body></html>"))
 
     def addRow(self, layout, index, count):
+        """ Create a row and add it to the layout asked. 
+        """
         for i in range(count):
             cell = QtWidgets.QPushButton(self.widget)
             cell.setText("")
